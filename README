@@ -1,0 +1,12 @@
+This is Service for Postmaster module [https://objectivehtml.com/index.php] which allows Push notification to be sent to mobile devices.
+
+Following notification types are supported:
+- Prowl (iOS) [http://www.prowlapp.com/]
+- Toasty (Windows Phone) [http://supertoasty.com/]
+- NotifyMyAndroid [https://www.notifymyandroid.com]
+
+To install, simply copy over the files. Now you should be able to select any of listed above services as "Email Service" for all your Parcels, Hooks and Notifications in Postmaster Control Panel.
+
+"To email" field should contain recipient API key. Other then this, set up SMS notifications just like you do with email notifications.
+
+Postmaster module is required.
