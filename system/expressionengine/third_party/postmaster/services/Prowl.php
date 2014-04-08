@@ -19,7 +19,7 @@ class Prowl_postmaster_service extends Base_service {
 	
 	public $default_settings = array(
         'api_key'	=> '',
-        'priority'  => '2'
+        'priority'  => '0'
 	);
 
 	public $fields = array(
@@ -31,7 +31,7 @@ class Prowl_postmaster_service extends Base_service {
 		)
 	);
 
-	public $description = 'Send Push notification to iOS device using Prowl service';
+	public $description = 'Send Push notification to iOS device using Prowl service. "To email" field should contain recipient API key.';
 
 	public function __construct()
 	{
@@ -56,27 +56,23 @@ class Prowl_postmaster_service extends Base_service {
             'providerkey'=> $settings->api_key,
             'priority'   => $settings->priority,
 			'url'        => $this->EE->config->item('site_url'),
-            'application'=> $parsed_object->from_name,
+            'application'=> ($parsed_object->from_name!='')?$parsed_object->from_name:$this->EE->config->item('site_name'),
 			'event'      => $parsed_object->subject,
 			'description'=> $message
 		);
-        
+
         $this->curl->create($this->url);
 		$this->curl->option(CURLOPT_CUSTOMREQUEST, 'POST');
 		$this->curl->option(CURLOPT_RETURNTRANSFER, TRUE);
-		
 		$this->curl->post($post);
 
 		$response = $this->curl->execute();
         
-        $this->load->library('xmlparser');
+        $this->EE->load->library('xmlparser');
 		$xml = $this->EE->xmlparser->parse_xml($response);
-        
-        var_dump($xml);
-        exit();
 
 		return new Postmaster_Service_Response(array(
-			'status'     => $ok == 'ok' ? POSTMASTER_SUCCESS : POSTMASTER_FAILED,
+			'status'     => $xml->children[0]->tag == 'success' ? POSTMASTER_SUCCESS : POSTMASTER_FAILED,
 			'parcel_id'  => $parcel->id,
 			'channel_id' => isset($parcel->channel_id) ? $parcel->channel_id : FALSE,
 			'author_id'  => isset($parcel->entry->author_id) ? $parcel->entry->author_id : FALSE,

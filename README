@@ -7,6 +7,6 @@ Following notification types are supported:
 
 To install, simply copy over the files. Now you should be able to select any of listed above services as "Email Service" for all your Parcels, Hooks and Notifications in Postmaster Control Panel.
 
-"To email" field should contain recipient API key. Other then this, set up SMS notifications just like you do with email notifications.
+"To email" field should contain recipient API key. Other then this, set up Push notifications just like you do with email notifications.
 
 Postmaster module is required.
