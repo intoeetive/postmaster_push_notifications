@@ -1,4 +1,4 @@
-This is Service for Postmaster module [https://objectivehtml.com/index.php] which allows Push notification to be sent to mobile devices.
+This is Service for Postmaster module [https://objectivehtml.com/index.php] which allows Push notification to be sent to mobile devices from ExpressionEngine 2 CMS.
 
 Following notification types are supported:
 - Prowl (iOS) [http://www.prowlapp.com/]
